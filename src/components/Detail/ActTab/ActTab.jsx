@@ -9,7 +9,6 @@ import React from "react";
 
 const ActTab = (props) => {
 
-    // eslint-disable-next-line react/prop-types
     const { isSelect, setIsSelect, scrollToAnchor} = props;
 
     return (

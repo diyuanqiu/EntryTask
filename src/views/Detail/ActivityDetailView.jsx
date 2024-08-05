@@ -22,10 +22,13 @@ const ActivityDetailView = () => {
 
     const eventDetail = location.state
 
+    // tabBar选择情况
     const [isSelect, setIsSelect] = useState(0)
 
+    // 用户是否评论
     const [isComment, setIsComment] = useState(false)
 
+    // 用户评论内容
     const [commentContent, setCommentContent] = useState('')
 
     const token = eventDetail.token
@@ -41,31 +44,7 @@ const ActivityDetailView = () => {
         }
     },[token])
 
-    // const naviToTab = () => {
-    //     if (isSelect === 0){
-    //         return (
-    //             <>
-    //                 <ActDescrip param={eventDetail}/>
-    //                 <ActWhenAndWhere param={eventDetail}/>
-    //                 <ActParticipant param={eventDetail}/>
-    //                 <ActComment param={eventDetail} commentContent={commentContent}/>
-    //             </>
-    //         )
-    //     } else if (isSelect === 1){
-    //         return (
-    //             <>
-    //                 <ActParticipant param={eventDetail}/>
-    //                 <ActComment param={eventDetail} commentContent={commentContent}/>
-    //             </>
-    //         )
-    //     } else return (
-    //         <>
-    //             <ActComment param={eventDetail} commentContent={commentContent}/>
-    //         </>
-    //     )
-    // }
-
-
+    // 快速锚点 select：tabBar选择情况
     const scrollToAnchor = (select) => {
         let anchorElement = null
         if (select === 0) {
@@ -101,7 +80,6 @@ const ActivityDetailView = () => {
                 <div className={DetailStyle.main}>
                     <ActTop param={eventDetail}/>
                     <ActTab isSelect={isSelect} setIsSelect={setIsSelect} scrollToAnchor={scrollToAnchor}/>
-                    {/*快速锚点*/}
                     <ActDescrip param={eventDetail}/>
                     <ActWhenAndWhere param={eventDetail}/>
                     <ActParticipant param={eventDetail} />

@@ -13,8 +13,10 @@ const ListView = () => {
 
     const location = useLocation();
 
+    // 搜索栏是否打开
     const [isSearchPanelOpen, setIsSearchPanelOpen] = React.useState(false);
 
+    // 活动列表数组
     const [eventsArr, setEventsArr] = useState([]);
 
     // 无限列表：活动offset
@@ -89,6 +91,7 @@ const ListView = () => {
         }
     },[loading])
 
+    // 监听容器滚动事件
     useEffect(() => {
         const container = containerRef.current;
         if (container) {
@@ -120,12 +123,15 @@ const ListView = () => {
     //     }
     // }, [eventsArr]);
 
+    // 关闭搜索栏
     const closeSearchPanel = () => {
         setIsSearchPanelOpen(false)
+        // 根据id定位搜索栏元素
         document.getElementById("sidebar").style.right = "100%";
         document.getElementById("main").style.marginLeft = "0";
     }
 
+    // 根据是否搜索来确定展示的是什么活动列表数据
     const eventList = (isSearch ? searchResArr : eventsArr).map((item, index) => {
         return (
                 <ListItem
@@ -138,7 +144,7 @@ const ListView = () => {
         )
     })
 
-    // 搜索功能  channelName: 用于结果页显示频道名称
+    // 搜索功能  channelNameText: 用于结果页显示频道名称  dateText：用于结果页显示日期
     const fetchSearchResult = async (channelId, after, before, channelNameText,dateText) => {
 
         // console.log(channelId)
@@ -158,6 +164,7 @@ const ListView = () => {
         let isEmpty;
         isEmpty = res.total <= 0;
 
+        // 搜索页样式
         search = (
             <div className={ListViewStyle.Search}>
                 <div className={ListViewStyle.resButton}>

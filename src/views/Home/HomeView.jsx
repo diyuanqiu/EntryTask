@@ -9,17 +9,17 @@ import noActivityIcon from "../../assets/SVGs/no-activity.svg"
 
 const HomeView = () => {
 
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState({}); // 用户个人信息
 
-    const [isSelect, setIsSelect] = useState(0);
+    const [isSelect, setIsSelect] = useState(0); // tabBar选择情况
 
-    const [likeEventsArr, setLikeEventsArr] = useState([]);
+    const [likeEventsArr, setLikeEventsArr] = useState([]); // 点赞的活动列表
 
-    const [pastEventsArr, setPastEventsArr] = useState([]);
+    const [pastEventsArr, setPastEventsArr] = useState([]); // 参与过的活动列表
 
-    const [goingEventsArr, setGoingEventsArr] = useState([]);
+    const [goingEventsArr, setGoingEventsArr] = useState([]); // 想要参与的活动列表
 
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token"); // 全局获取token
 
     const getUserInfo = async () => {
         let url = '/user'
@@ -60,6 +60,7 @@ const HomeView = () => {
     }, [token, user])
 
 
+    // 没有活动时的页面样式
     const noFoundPage = (
         <div className = {HomeViewStyle.noActivity} >
             <img

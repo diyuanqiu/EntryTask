@@ -9,11 +9,12 @@ import {changeGoingStatus, changeLikeStatus} from "../../../api/apiFetch.js";
 
 const ActDownBar = (props) => {
 
-    // eslint-disable-next-line react/prop-types
     const {param, isComment, setIsComment } = props;
 
+    // 是否参与
     const [isJoined, setIsJoined] = React.useState(false)
 
+    // 是否点赞
     const [isLiked, setIsLiked] = React.useState(false)
 
     const handleIsLiked = async () => {
@@ -23,6 +24,7 @@ const ActDownBar = (props) => {
 
         param.me_likes = !param.me_likes
 
+        // 活动总的点赞数要发生变化
         if (param.me_likes) {
             param.likes_count += 1
         } else {
@@ -39,6 +41,7 @@ const ActDownBar = (props) => {
 
         param.me_going = !param.me_going
 
+        // 活动总的参与数要发生变化
         if (param.me_going) {
             param.goings_count += 1
         } else {
@@ -51,7 +54,7 @@ const ActDownBar = (props) => {
     useEffect(()=>{
         setIsLiked(param.me_likes)
         setIsJoined(param.me_going)
-    },[param.me_going,param.me_likes])
+    },[param.me_going,param.me_likes]) // 用户点赞或者参与时就触发
 
     return (
         <React.Fragment>

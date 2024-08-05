@@ -12,14 +12,19 @@ const ListItem = (props) => {
 
     const {param,token,avatar,top,height} = props
 
+    // 参与图标
     const [goImage, setGoImage] = useState(null)
 
+    // 参与文本
     const [goText, setGoText] = useState('')
 
+    // 点赞图标
     const [likeImage, setLikeImage] = useState(null)
 
+    // 点赞文本
     const [likeText, setLikeText] = useState('')
 
+    // 活动预览图
     const [pic, setPic] = useState(null)
 
     const Navigate = useNavigate()
@@ -65,6 +70,7 @@ const ListItem = (props) => {
             setGoText(<span className={ListItemStyle.Text}>{param.goings_count} Going</span>)
         }
     }
+
     // 喜欢或取消喜欢
     const changeLike = async () => {
         let url = `/events/${param.id}/likes`

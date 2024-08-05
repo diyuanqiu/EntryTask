@@ -5,9 +5,9 @@ import sendIcon from '../../../assets/SVGs/send.svg'
 
 const ActCommentBar = (props) => {
 
-    // eslint-disable-next-line react/prop-types
     const { isComment, setIsComment, sendComment} = props;
 
+    // 用户评论内容
     const [commentContent, setCommentContent] = React.useState('');
 
 

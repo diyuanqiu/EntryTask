@@ -8,13 +8,13 @@ const LoginView = () => {
 
     const Navigate = useNavigate()
 
-    const [username, setUsername] = useState('')
+    const [username, setUsername] = useState('') // 用户名
 
-    const [password, setPassword] = useState('')
+    const [password, setPassword] = useState('') // 用户密码
 
-    const [token, setToken] = useState('')
+    const [token, setToken] = useState('') // 用户登录后token
 
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState({}) // 用户个人信息
 
     const loginToCat = async() => {
 
@@ -26,7 +26,6 @@ const LoginView = () => {
 
             // 全局存储token，不必一级一级传递
             localStorage.setItem('token',res.token)
-
 
             setToken(res.token)
             setUser(res.user)

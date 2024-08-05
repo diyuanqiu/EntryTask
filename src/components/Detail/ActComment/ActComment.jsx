@@ -8,6 +8,7 @@ const ActComment = (props) => {
 
     const {param, commentContent} = props
 
+    // 全部评论数据
     const [comments, setComments] = useState([])
 
     const fetchComments = async () => {
@@ -23,6 +24,7 @@ const ActComment = (props) => {
         // console.log(comments)
     },[param.id, commentContent])
 
+    // 评论发布时间
     const commentInterval = (createTime) => {
 
         let create = moment(createTime)
@@ -48,6 +50,7 @@ const ActComment = (props) => {
         return `published ${duration} days ago`
     }
 
+    // 评论列表
     const displayComments = comments.map((item,index) => {
         return (
             <div className={CommentStyle.Comment} id={"Comments"}>

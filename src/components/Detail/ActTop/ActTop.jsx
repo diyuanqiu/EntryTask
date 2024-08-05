@@ -6,6 +6,7 @@ const ActTop = (props) => {
 
     const {param} = props
 
+    // 发布时间与现在的间隔时间
     const [publishedInterval, setPublishedInterval] = React.useState(0)
 
     const getPublishedInterval = () =>{

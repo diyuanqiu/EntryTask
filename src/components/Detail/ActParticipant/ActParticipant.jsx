@@ -8,8 +8,10 @@ const ActParticipant = (props) => {
 
     const {param} = props
 
+    // 参与人数组
     const [participants, setParticipants] = useState([])
 
+    // 点赞人数组
     const [likes, setLikes] = useState([])
 
     const fetchParticipantsAndLikes = async () => {

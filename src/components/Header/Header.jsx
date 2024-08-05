@@ -8,11 +8,10 @@ const Header =  ((props) => {
 
     const Navigate = useNavigate();
 
-    // eslint-disable-next-line react/prop-types
-    const {isSearchPanelOpen, setIsSearchPanelOpen, avatar, token} = props;
+    const {setIsSearchPanelOpen, avatar} = props;
 
+    // 根据当前页面决定点击事件
     const judgeFlag= () => {
-        // eslint-disable-next-line react/prop-types
         if (props.flag === 'search') {
             setIsSearchPanelOpen(true)
             document.getElementById("sidebar").style.right = "25%";
@@ -22,13 +21,13 @@ const Header =  ((props) => {
         }
     }
 
+    // 导航至个人页面
     const naviHomePage = () => {
         Navigate('/Home')
     }
 
     return (
         <div className={headerStyle.container}>
-            {/* eslint-disable-next-line react/prop-types */}
             <img src={props.flag === 'search' ? searchIcon : homeIcon} alt='img' className={headerStyle.search} onClick={judgeFlag}/>
             <img src={logoIcon} alt='img' className={headerStyle.logo}/>
             <img src={avatar} alt='img' className={headerStyle.user} onClick={naviHomePage}/>

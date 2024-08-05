@@ -30,23 +30,23 @@ const SearchPanel = (props) => {
 
     const [datePickId, setDatePickId] = useState(-1); // 选择的日期
 
-    const [channelPickId, setChannelPickId] = useState([]); // 是否选择的频道列表 由true和false组成
+    const [channelPickId, setChannelPickId] = useState([]); // 判断是否选择的频道列表 由true和false组成
 
-    const [chosenChannelId, setChosenChannelId] = useState(''); // 选中的频道列表id
+    const [chosenChannelId, setChosenChannelId] = useState(''); // 选中的频道列表id，用于请求服务端
 
-    const [searchChannelText, setSearchChannelText] = useState('All');//已选频道显示
+    const [searchChannelText, setSearchChannelText] = useState('All'); // 已选频道显示文本
 
-    const [searchDateText, setSearchDateText] = useState('');//已选日期显示
+    const [searchDateText, setSearchDateText] = useState(''); // 已选日期显示文本
 
-    const [searchDateFrom, setSearchDateFrom] = useState('09/05');//起始日期
+    const [searchDateFrom, setSearchDateFrom] = useState('09/05'); // 起始日期
 
-    const [searchDateTo, setSearchDateTo] = useState('09/05');//截止日期
+    const [searchDateTo, setSearchDateTo] = useState('09/05'); // 截止日期
 
     // moment转时间戳
-    const [searchDateAfter, setSearchDateAfter] = useState('');
-    const [searchDateBefore, setSearchDateBefore] = useState('');
+    const [searchDateAfter, setSearchDateAfter] = useState('') // 起始日期转时间戳
+    const [searchDateBefore, setSearchDateBefore] = useState(''); // 截止日期转时间戳
 
-    const [searchDatePanel, setSearchDatePanel] = useState(null);//LATER日期搜索栏
+    const [searchDatePanel, setSearchDatePanel] = useState(null); // LATER日期搜索栏
 
     const [channel,setChannel] = useState([]); // 频道名称
 
@@ -65,6 +65,7 @@ const SearchPanel = (props) => {
         fetchChannels()
     },[token])
 
+    // 初始化，频道都处于未选择状态
     useEffect(()=>{
         setChannelPickId(new Array(channel.length).fill(false))
     },[])
@@ -74,6 +75,7 @@ const SearchPanel = (props) => {
         const selectedDateId = e.target.tabIndex;
         setDatePickId(selectedDateId);
         if (e.target.innerText === "LATER") {
+            // later打开日期选择 样式
             setSearchDatePanel(
                 <div className={SearchStyle.inputContainer}>
                     <input
@@ -99,6 +101,7 @@ const SearchPanel = (props) => {
             setSearchDatePanel(null);
         }
         switch (e.target.innerText) {
+            // 根据不同的日期选择，设定不同的参数
             case "TODAY":
                 setSearchDateText(`from ${TODAYSTART} to ${TODAYEND}`)
                 setSearchDateFrom(TODAYSTART)
@@ -162,6 +165,7 @@ const SearchPanel = (props) => {
         setChannelPickId(newChannelPickId);
     }
 
+    // 设定选中的频道id和频道名称文本
     const handleSetChosenChannel = () => {
 
         const selectedChannels = channel.filter((_,index) => channelPickId[index] === true)
