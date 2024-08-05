@@ -1,0 +1,38 @@
+@font-face {
+    font-family: "SourceSans3-Regular";
+    src: url("../../assets/FONTs/SourceSans3-Regular.ttf");
+}
+
+.container {
+    height: 100vh;
+    width: 100vw;
+}
+
+.ListBox {
+    overflow: scroll;
+    overflow-x: hidden;
+    height: calc(100vh - 11vw - 38vh);
+    width: 100%;
+    padding-top: 2vw;
+}
+
+.noActivity {
+    height: calc(100vh - 11vw - 38vh);
+    background-color: #FAFAFA;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.noActivityIcon {
+    width: 16vw;
+    height: 16vw;
+}
+
+.noActivityText {
+    font-family: "SourceSans3-Regular", serif;
+    color: #BABABA;
+    font-size: 4vw;
+}

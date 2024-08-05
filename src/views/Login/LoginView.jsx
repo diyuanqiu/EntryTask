@@ -1,0 +1,85 @@
+import loginStyle from './LoginView.module.css'
+import logoIcon from '../../assets/SVGs/logo-cat.svg'
+import {useNavigate} from "react-router-dom";
+import React, {useState} from "react";
+import {login, register} from "../../api/apiFetch.js";
+import myFetch from "../../api/myFetch.js";
+
+const LoginView = () => {
+
+    const Navigate = useNavigate()
+
+    const [username, setUsername] = useState('')
+
+    const [password, setPassword] = useState('')
+
+    const [token, setToken] = useState('')
+
+    const [user, setUser] = useState({})
+
+    const loginToCat = async() => {
+
+        let url = ('/auth/token')
+
+        let res = await login(url,username,password)
+        console.log(res)
+        if (res.token) {
+
+            // 全局存储token，不必一级一级传递
+            localStorage.setItem('token',res.token)
+
+
+            setToken(res.token)
+            setUser(res.user)
+            Navigate('/List',{state:{...res.user,token:res.token}})
+        } else if (res.error === "error_user_not_found") {
+            // 注册
+            let url = ('/join')
+
+            let res =await register(url,username,password)
+            console.log(res)
+            if(res.token){
+                setToken(res.token)
+                setUser(res.user)
+                Navigate('/List',{state:{...res.user,token:res.token}})
+            }
+        } else {
+            alert('error password')
+        }
+    }
+
+    return (
+        <React.Fragment>
+            <div className={loginStyle.container}>
+                <div className={loginStyle.box}>
+                    <div className={loginStyle.mask}>
+                        <div className={loginStyle.title}>
+                            <div className={loginStyle.titleText}>
+                                <p className={loginStyle.title1}>FIND THE MOST LOVED ACTIVITIES</p>
+                                <p className={loginStyle.title2}>BLACK CAT</p>
+                            </div>
+                            <div className={loginStyle.titlePic}>
+                                <img src={logoIcon} alt=' ' className={loginStyle.logoPic}/>
+                            </div>
+                        </div>
+                        <div className={loginStyle.inputBox}>
+                            <input type={"text"} placeholder={"Username"} className={loginStyle.usernameInput}
+                                   onChange={(e)=> {
+                                       setUsername(e.target.value)
+                                   }}/>
+                            <input type={"password"} placeholder={"Password"} className={loginStyle.passwordInput}
+                                   onChange={(e)=>{
+                                       setPassword(e.target.value)
+                                   }}/>
+                        </div>
+                    </div>
+                </div>
+                <div className={loginStyle.button} onTouchStart={loginToCat}>
+                    SIGN IN
+                </div>
+            </div>
+        </React.Fragment>
+    )
+}
+
+export default LoginView

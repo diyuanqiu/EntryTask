@@ -1,0 +1,130 @@
+@font-face {
+    font-family: "SourceSans3-SemiBold";
+            src: url("../../assets/FONTs/SourceSans3-SemiBold.ttf");
+}
+
+@font-face {
+    font-family: "SourceSans3-Bold";
+    src: url("../../assets/FONTs/SourceSans3-Bold.ttf");
+}
+
+@font-face {
+    font-family: "SourceSans3-Regular";
+    src: url("../../assets/FONTs/SourceSans3-Regular.ttf");
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+}
+
+.container .box {
+    width: 100%;
+    height: calc(100% - 100px);
+    background-image: url("../../assets/IMGs/Street-Dance-01.jpg");
+    background-position-x: -10rem;
+    background-position-y: -2rem;
+    background-size: cover;
+    position: relative;
+}
+
+.mask {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-image: linear-gradient(rgba(133, 96, 169, 0.7), rgba(133, 96, 169, 1));
+}
+
+.title {
+    margin-top: 20vw;
+}
+
+.title .titleText {
+    line-height: 3.5vw;
+    color: #D5EF7F;
+}
+
+.title .titleText .title1 {
+    text-align: center;
+    font-family: "SourceSans3-SemiBold", serif;
+    font-size: 5vw;
+}
+
+.title .titleText .title2 {
+    text-align: center;
+    font-family: "SourceSans3-Bold", serif;
+    font-size: 8vw;
+}
+
+.title .titlePic {
+    padding: 10px;
+    height: 12vw;
+    width: 12vw;
+    border:1px solid #D5EF7F;
+    border-radius: 100%;
+    margin: 15vw auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logoPic{
+    transform: translateY(-100vw);
+    filter: drop-shadow(0 100vw #D5EF7F);
+}
+
+.container .box .mask .inputBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.inputBox .usernameInput {
+    background-image: url("../../assets/SVGs/user.svg");
+    background-repeat: no-repeat;
+    background-size: 4.375vw, 4.375vw;
+    background-position: 4.156vw, calc(50% - 4.375vw);
+    margin-top: 10vw;
+    margin-bottom: 20px;
+}
+
+.inputBox .passwordInput {
+    background-image: url("../../assets/SVGs/password.svg");
+    background-repeat: no-repeat;
+    background-size: 4.375vw, 4.375vw;
+    background-position: 4.156vw, calc(50% - 4.375vw);
+    margin-bottom: 20px;
+}
+
+.inputBox input {
+    font-family: "SourceSans3-Regular", serif;
+    box-sizing: border-box;
+    width: 75vw;
+    height: 12.5vw;
+    border-radius: 4rem;
+    background-color: transparent;
+    border: .01rem solid #fff;
+    opacity: 0.8;
+    font-size: 5vw;
+    padding-left: 12vw;
+}
+
+.inputBox input::placeholder{
+    color: #AC8EC9
+}
+
+.inputBox input:focus{
+    background-color: rgba(255, 255, 255, 0.2);
+    border: .01rem solid #fff;
+}
+
+.button {
+    text-align: center;
+    width: 100%;
+    height: 100px;
+    align-content: center;
+    align-items: center;
+    font-family: "SourceSans3-SemiBold", serif;
+    background-color: #D5EF7F;
+}

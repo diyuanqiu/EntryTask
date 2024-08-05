@@ -1,0 +1,42 @@
+@font-face {
+    font-family: "SourceSans3-Regular";
+    src: url("../../../assets/FONTs/SourceSans3-Regular.ttf");
+}
+
+.List {
+    margin-left: 4vw;
+    border-bottom: .6vw solid #E8E8E8;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    scroll-margin-top: 25vw;
+}
+
+.GoingAndLike {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 30vw;
+}
+
+.List .goingList {
+    list-style-type: none;
+    display: flex;
+    width: 70vw;
+    flex-wrap: wrap;
+    padding: 0 8vw 0 0;
+}
+
+.Icon {
+    width: 6vw;
+    height: 6vw;
+    border-radius: 100%;
+    margin-left: 1.5vw;
+}
+
+.Text {
+    font-family: "SourceSans3-Regular", serif;
+    font-size: 3.5vw;
+    margin-left: 2vw;
+    color: #67616D;
+}

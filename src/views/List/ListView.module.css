@@ -1,0 +1,98 @@
+@font-face {
+    font-family: "SourceSans3-SemiBold";
+    src: url("../../assets/FONTs/SourceSans3-SemiBold.ttf");
+}
+
+@font-face {
+    font-family: "SourceSans3-Regular";
+    src: url("../../assets/FONTs/SourceSans3-Regular.ttf");
+}
+
+.mask {
+    position: absolute;
+    height: 100%;
+    width: 25%;
+}
+
+.container {
+    height: 100vh;
+    transition: margin-left .5s;
+}
+
+.ListBox {
+    height: calc(100vh - 13vw);
+    overflow-x: scroll;
+}
+
+.Search {
+    box-sizing: border-box;
+    width: 100vw;
+    background-color: #faf9fc;
+    padding: 4.5vw 5vw 3.5vw 8vw;
+    position: sticky;
+    top: 13vw;
+}
+
+.resButton {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5vw;
+}
+
+.Search p {
+    margin: 0;
+}
+
+p.resCount {
+    font-family: SourceSansPro-Semibold,serif;
+    color: #8560a9;
+    font-size: 5vw;
+}
+
+p.resContent {
+    color: #67616d;
+    font-size: 3.75vw;
+    font-family: SourceSansPro-Regular,serif;
+    word-break: break-word;
+}
+
+div.Search button {
+    width: 35vw;
+    height: 8vw;
+    background-color: #d5ef7f;
+    color: #67616d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border-radius: 3.75vw;
+    font-size: 3vw;
+}
+
+div.noActivity {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.noActivity div {
+    margin-top: 60vh;
+    width: 16vw;
+    height: 16vw;
+    background-image: url('../../assets/SVGs/no-activity.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-right: 0;
+}
+
+div.noActivity p {
+    font-family:SourceSansPro-Regular, serif;
+    margin: 0;
+    margin-top: 4vw;
+    font-size: 5vw;
+    color: #BABABA;
+}

@@ -1,0 +1,50 @@
+@font-face {
+    font-family: "SourceSans3-SemiBold";
+    src: url("../../../assets/FONTs/SourceSans3-SemiBold.ttf");
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.container .Icon {
+    width: 7vw;
+    height: 7vw;
+}
+
+.container .left {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 60vw;
+    height: 15vw;
+    background-color: #8560A9;
+}
+
+.container .right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40vw;
+    height: 15vw;
+    background-color: #D5EF7F;
+}
+
+.container .right .Text {
+    margin-left: 2vw;
+    font-size: 4vw;
+    font-family: "SourceSans3-SemiBold", sans-serif;
+    color: #67616D;
+}
+
+.container .right .GoingText {
+    margin-left: 2vw;
+    font-size: 4vw;
+    font-family: "SourceSans3-SemiBold", sans-serif;
+    color: #8560a9;
+}

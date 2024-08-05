@@ -1,0 +1,172 @@
+@font-face {
+    font-family: "SourceSans3-Regular";
+    src: url("../../assets/FONTs/SourceSans3-Regular.ttf");
+}
+
+@font-face {
+    font-family: "SourceSans3-SemiBold";
+    src: url("../../assets/FONTs/SourceSans3-SemiBold.ttf");
+}
+
+.sidebar {
+    height: 100%;
+    background-color: #453257;
+    right: 100%;
+    width: 75%;
+    position: fixed;
+    transition: .5s;
+}
+
+.sidebar .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2vw 5vw 0 5vw;
+}
+
+.content .title {
+    margin-top: 2vw;
+    font-family: "SourceSans3-SemiBold", serif;
+    color: #ac8ec9;
+    font-size: 4vw;
+    border-bottom: .5vw solid #8560a9;
+}
+
+.content .list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin-top: 3vw;
+    padding: 0;
+}
+
+.dateItem {
+    color: #FFFFFF;
+    font-family: "SourceSans3-SemiBold", serif;
+    font-size: 4vw;
+    margin: 2.8vw 3vw 0 0;
+    padding: 3px 7px 3px 7px;
+}
+
+.channelItem {
+    color: #FFFFFF;
+    font-family: "SourceSans3-SemiBold", serif;
+    font-size: 4vw;
+    margin: 3vw 4vw 0 0;
+    border-radius: 4vw;
+    border: 1px solid #FFFFFF;
+    padding: 3px 7px 3px 7px;
+}
+
+.search {
+    height: 30vw;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #D5EF7F;
+    position: absolute;
+    bottom: 0;
+}
+
+.unSearch {
+    height: 30vw;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #BABABA;
+    position: absolute;
+    bottom: 0;
+}
+
+.sidebar .searchMain {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 20%;
+    margin-top: 7vw;
+}
+
+.searchMain .searchTitle {
+    font-family: "SourceSans3-SemiBold", serif;
+    font-size: 5vw;
+}
+
+.searchInfo {
+    text-align: center;
+    word-break: break-word;
+    font-family: "SourceSans3-Regular", serif;
+    font-size: 3.4vw;
+    color: #8560a9;
+    margin: 0 14px;
+}
+
+.searchIcon {
+    width: 8vw;
+    height: 8vw;
+}
+
+.dateItemPick {
+    font-family: "SourceSans3-SemiBold", serif;
+    font-size: 4vw;
+    margin: 2.8vw 3vw 0 0;
+    color: #453257;
+    border-radius: 4vw;
+    background-color: #E5F7A9;
+    padding: 3px 7px 3px 7px;
+}
+
+.channelItemPick {
+    color: #453257;
+    font-family: "SourceSans3-SemiBold", serif;
+    font-size: 4vw;
+    margin: 3vw 4vw 0 0;
+    border-radius: 4vw;
+    border: 1px solid #FFFFFF;
+    background-color: #E5F7A9;
+    padding: 3px 7px 3px 7px;
+}
+
+.inputContainer {
+    width: 100%;
+    position: relative;
+}
+
+div.sharpCornar {
+    position: absolute;
+    top: -4vw;
+    left: 33vw;
+    width: 0;
+    height: 0;
+    border-width: 2.8vw;
+    border-style: solid;
+    border-color: transparent transparent #ffffff transparent;
+}
+
+input.searchInput {
+    box-sizing: border-box;
+    width: 45%;
+    height: 7.8vw;
+    outline: none;
+    border-width: 0;
+    background-size: 6.25vw 3.75vw;
+    background-position: 0 50%;
+    padding-left: 5.3vw;
+    color: #8560a9;
+}
+
+input.searchInput::placeholder{
+    color: #888; /* 设置 placeholder 的颜色 */
+    font-style: italic; /* 设置 placeholder 的字体样式 */
+}
+
+input.dateFrom {
+    background-image: url('../../assets/SVGs/date-from.svg');
+    background-repeat: no-repeat;
+}
+
+input.dateTo {
+    background-image: url('../../assets/SVGs/date-to.svg');
+    background-repeat: no-repeat;
+}

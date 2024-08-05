@@ -1,0 +1,133 @@
+@font-face {
+    font-family: "SourceSans3-SemiBold";
+    src: url("../../assets/FONTs/SourceSans3-SemiBold.ttf");
+}
+
+@font-face {
+    font-family: "SourceSans3-Bold";
+    src: url("../../assets/FONTs/SourceSans3-Bold.ttf");
+}
+
+@font-face {
+    font-family: "SourceSans3-Regular";
+    src: url("../../assets/FONTs/SourceSans3-Regular.ttf");
+}
+
+.container {
+    width: 90vw;
+    border-bottom: #E8E8E8 1px solid;
+    margin: 0 5vw 0 5vw;
+}
+
+.container .topInfo {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 3vw 0 1vw 0;
+}
+
+.container .topInfo .userInfo{
+    display: flex;
+    align-items: center;
+}
+
+.container .actInfo {
+    margin-top: 2.5vw;
+}
+
+.userAva {
+    height: 6vw;
+    width: 6vw;
+    margin-right: 2.5vw;
+}
+
+.userName {
+    font-family: "SourceSans3-SemiBold", serif;
+    color: #67616D;
+    font-size: 3.2vw;
+
+}
+
+.channel {
+    border: #D3C1E5 1px solid;
+    border-radius: 3.2vw;
+    padding: .6vw 2vw 0 2vw;
+    font-family: "SourceSans3-Regular", serif;
+    color: #8560a9;
+    font-size: 3.2vw;
+}
+
+.container .actInfo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container .actInfo .actTitle {
+    font-family: "SourceSans3-SemiBold", serif;
+    font-size: 5vw;
+    text-align: left;
+}
+
+.container .actInfo .actTime {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+}
+
+.container .actInfo .actTime .time {
+    font-family: "SourceSans3-Regular", serif;
+    font-size: 3.2vw;
+    color: #8560a9;
+}
+
+.timeIcon {
+    width: 3.2vw;
+    height: 3.2vw;
+    margin-right: 2vw;
+    margin-bottom: .4vw;
+}
+
+.container .actInfo .testImage {
+    margin-top: 1vw;
+    width: 16vw;
+    height: 16vw;
+}
+
+.container .descrip {
+    font-family: "SourceSans3-Regular", serif;
+    font-size: 4.4vw;
+    color: #67616D;
+    text-align: left;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 2.5vw;
+}
+
+.goAndLike {
+    display: grid;
+    grid-template-columns: 32.5vw auto;
+    text-align: left;
+    margin-bottom: 4.5vw;
+}
+
+.goAndLike .goLike {
+    display: flex;
+    align-items: center;
+}
+
+.goAndLike .goLike .Icon {
+    width: 3.2vw;
+    height: 3.2vw;
+}
+
+.goAndLike .goLike .Text {
+    font-family: "SourceSans3-Regular", serif;
+    font-size: 3.2vw;
+    margin-left: 1vw;
+    color: #AC8EC9;
+}
