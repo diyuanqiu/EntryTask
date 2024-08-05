@@ -1,6 +1,5 @@
 import searchIcon from '../../assets/SVGs/search.svg';
 import logoIcon from '../../assets/SVGs/logo-cat1.svg';
-import userIcon from '../../assets/SVGs/user.svg';
 import homeIcon from '../../assets/SVGs/home.svg';
 import headerStyle from './Header.module.css';
 import {useNavigate} from "react-router-dom";

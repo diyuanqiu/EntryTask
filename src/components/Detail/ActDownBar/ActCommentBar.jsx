@@ -2,7 +2,6 @@ import CommentBarStyle from './ActCommentBar.module.css';
 import React from 'react';
 import crossIcon from '../../../assets/SVGs/cross.svg'
 import sendIcon from '../../../assets/SVGs/send.svg'
-import {postCommentToEvent} from "../../../api/apiFetch.js";
 
 const ActCommentBar = (props) => {
 

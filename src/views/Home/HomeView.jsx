@@ -2,7 +2,7 @@ import Header from "../../components/Header/Header.jsx";
 import HomeViewStyle from ".//HomeView.module.css";
 import HomeInfo from "../../components/Home/HomeInfo.jsx";
 import React, {useEffect, useState} from "react";
-import {fetchEvents, fetchUserDetail} from "../../api/apiFetch.js";
+import {fetchUserDetail} from "../../api/apiFetch.js";
 import HomeTab from "../../components/Home/HomeTab.jsx";
 import ListItem from "../../components/ListItem/ListItem.jsx";
 import noActivityIcon from "../../assets/SVGs/no-activity.svg"

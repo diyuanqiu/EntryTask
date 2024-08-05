@@ -5,10 +5,7 @@ import React, {useCallback, useEffect, useRef, useState} from "react";
 import SearchPanel from "../../components/SearchPanel/SearchPanel.jsx";
 import {useLocation, useNavigate} from "react-router-dom";
 import {fetchEvents} from "../../api/apiFetch.js";
-import SearchStyle from "../../components/SearchPanel/SearchPanel.module.css";
 import myFetch from "../../api/myFetch.js";
-import moment from "moment";
-// import {useState} from "react";
 
 const ListView = () => {
 

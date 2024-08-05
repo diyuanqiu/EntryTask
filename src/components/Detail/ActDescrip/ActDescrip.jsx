@@ -1,6 +1,5 @@
 import DesStyle from './ActDescrip.module.css';
 import React, {useEffect, useState} from "react";
-import testImage from '../../../assets/IMGs/Street-Dance-01.jpg'
 
 const ActDescrip = (props) => {
 

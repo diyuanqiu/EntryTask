@@ -3,7 +3,6 @@ import logoIcon from '../../assets/SVGs/logo-cat.svg'
 import {useNavigate} from "react-router-dom";
 import React, {useState} from "react";
 import {login, register} from "../../api/apiFetch.js";
-import myFetch from "../../api/myFetch.js";
 
 const LoginView = () => {
 

@@ -2,7 +2,7 @@ import DetailStyle from "./ActivityDetailView.module.css";
 import Header from "../../components/Header/Header.jsx";
 import ActTop from "../../components/Detail/ActTop/ActTop.jsx";
 import ActTab from "../../components/Detail/ActTab/ActTab.jsx";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import React from "react";
 import ActDescrip from "../../components/Detail/ActDescrip/ActDescrip.jsx";
 import ActWhenAndWhere from "../../components/Detail/ActWhenAndWhereInfo/ActWhenAndWhere.jsx";

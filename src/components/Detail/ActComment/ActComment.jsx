@@ -1,6 +1,5 @@
 import CommentStyle from './ActComment.module.css'
 import React, {useEffect, useState} from "react";
-import userIcon from "../../../assets/SVGs/user.svg";
 import replyIcon from "../../../assets/SVGs/reply.svg";
 import {fetchEventsDetail} from "../../../api/apiFetch.js";
 import moment from "moment";

@@ -2,12 +2,10 @@ import ListItemStyle from './ListItem.module.css';
 import timeIcon from '../../assets/SVGs/time.svg';
 import checkOutlineIcon from '../../assets/SVGs/check-outline.svg';
 import checkIcon from '../../assets/SVGs/check.svg';
-import likeOutlineIcon from '../../assets/SVGs/like-outline.svg';
 import likeIcon from '../../assets/SVGs/like.svg';
 import {useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import moment from "moment";
-import myFetch from "../../api/myFetch.js";
 import {changeGoingStatus, changeLikeStatus} from "../../api/apiFetch.js";
 
 const ListItem = (props) => {
