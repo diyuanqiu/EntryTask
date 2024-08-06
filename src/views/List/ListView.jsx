@@ -116,17 +116,17 @@ const ListView = () => {
     //     let startIndex = 0;
     //     let endIndex = startIndex + 3
     //     let topOffset = 0;
-    //     let bottomOffset = 0;
+    //     // let bottomOffset = 0;
     //     for (let i = 0; i < eventsArr.length; i++) {
     //         const itemHeight = itemHeights.current[i] || 50; // default to 50 if height not measured yet
     //         if (topOffset < scrollTop) {
     //             startIndex = i;
     //             topOffset += itemHeight;
     //         }
-    //         if (bottomOffset < scrollTop + clientHeight) {
-    //             endIndex = i;
-    //             bottomOffset += itemHeight;
-    //         }
+    //         // if (bottomOffset < scrollTop + clientHeight) {
+    //         //     endIndex = i;
+    //         //     bottomOffset += itemHeight;
+    //         // }
     //     }
     //     // 上下额外多渲染几个 item，解决滚动时来不及加载元素出现短暂的空白区域的问题
     //     const paddingCount = 2;
@@ -138,6 +138,18 @@ const ListView = () => {
     //
     // const handleItemHeight = (index, height) => {
     //     itemHeights.current[index] = height;
+    //     calculateTotalHeight()
+    // };
+    //
+    // const calculateTotalHeight = () => {
+    //     let totalHeight = 0;
+    //     for (let key in itemHeights.current) {
+    //         totalHeight += itemHeights.current[key];
+    //     }
+    //     totalHeightRef.current = totalHeight;
+    //     if (containerRef.current) {
+    //         containerRef.current.style.height = `${totalHeight}px`;
+    //     }
     // };
 
     // 关闭搜索栏

@@ -100,7 +100,7 @@ const ListItem = (props) => {
     //     if (itemRef.current) {
     //         onHeight(itemRef.current.getBoundingClientRect().height);
     //     }
-    // }, [itemRef, onHeight]);
+    // }, [onHeight]);
 
     return (
         <React.Fragment>
