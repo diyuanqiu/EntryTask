@@ -21,7 +21,7 @@
 
 .ListBox {
     height: calc(100vh - 13vw);
-    overflow-x: scroll;
+    overflow: scroll;
 }
 
 .Search {

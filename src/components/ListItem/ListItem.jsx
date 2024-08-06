@@ -4,13 +4,13 @@ import checkOutlineIcon from '../../assets/SVGs/check-outline.svg';
 import checkIcon from '../../assets/SVGs/check.svg';
 import likeIcon from '../../assets/SVGs/like.svg';
 import {useNavigate} from "react-router-dom";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import moment from "moment";
 import {changeGoingStatus, changeLikeStatus} from "../../api/apiFetch.js";
 
 const ListItem = (props) => {
 
-    const {param,token,avatar} = props
+    const {param,token,avatar, onHeight} = props
 
     // 参与图标
     const [goImage, setGoImage] = useState(null)
@@ -26,6 +26,8 @@ const ListItem = (props) => {
 
     // 活动预览图
     const [pic, setPic] = useState(null)
+
+    const itemRef = useRef(null);
 
     const Navigate = useNavigate()
 
@@ -94,9 +96,15 @@ const ListItem = (props) => {
         Navigate('/Detail', {state:{...param,token:token,avatar:avatar}})
     }
 
+    // useEffect(() => {
+    //     if (itemRef.current) {
+    //         onHeight(itemRef.current.getBoundingClientRect().height);
+    //     }
+    // }, [itemRef, onHeight]);
+
     return (
         <React.Fragment>
-            <div className={ListItemStyle.container}>
+            <div className={ListItemStyle.container} ref={itemRef}>
                 <div className={ListItemStyle.topInfo}>
                     <div className={ListItemStyle.userInfo}>
                         <img src={param.creator.avatar} alt={'用户头像'} className={ListItemStyle.userAva}/>

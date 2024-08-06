@@ -42,7 +42,11 @@ const ListView = () => {
     const containerRef = useRef(null);
 
     // 虚拟列表
-    const listRef = useRef(null);
+    const [visibleItems, setVisibleItems] = useState([]);
+    const itemHeights = useRef({})
+
+    // 用于保存所有列表项的总高度
+    const totalHeightRef = useRef(0);
 
     // 确保活动列表数据只初始化一次
     const hasFetchedInitialData = useRef(false)
@@ -50,7 +54,8 @@ const ListView = () => {
     // 请求活动列表数据
     const fetchEventsAll = async () => {
         setLoading(true)
-        let url = (`/events?offset=${offset}&&limit=8`)
+        let url = (`/events?offset=${offset}&&limit=10`)
+        // let url = ('/events')
         let res = await fetchEvents(url, token)
         if (res.error === 'invalid_token'){
             alert("Permission denied")
@@ -61,7 +66,6 @@ const ListView = () => {
     }
 
     useEffect(()=>{
-        // console.log(location.state)
         // 检查token是否存在
         if(!token){
             alert("No token found")
@@ -72,6 +76,11 @@ const ListView = () => {
             hasFetchedInitialData.current = true
         }
     },[token])
+
+    // useEffect(()=>{
+    //     calculateVisibleItems()
+    // },[eventsArr])
+
 
     // 第二个useEffect处理offset改变的情况
     useEffect(() => {
@@ -84,8 +93,9 @@ const ListView = () => {
     const handleScroll = useCallback(()=>{
         if (containerRef.current) {
             const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
+            // calculateVisibleItems()
             if (scrollHeight - scrollTop <= clientHeight * 1.5 && !loading) {
-                setOffset(prevOffset => prevOffset + 8); // 加载更多数据，增加偏移量
+                setOffset(prevOffset => prevOffset + 10); // 加载更多数据，增加偏移量
             }
         }
     },[loading])
@@ -103,24 +113,32 @@ const ListView = () => {
     // const calculateVisibleItems = () => {
     //     if (!containerRef.current) return [];
     //     const { scrollTop, clientHeight } = containerRef.current;
-    //     const start = Math.max(0,Math.floor(scrollTop / itemHeight));
-    //     const end = Math.min(eventsArr.length, Math.ceil((scrollTop+clientHeight)/itemHeight));
-    //     return eventsArr.slice(start,end)
-    // }
-
-    // 获得可见区域的内容
-    // const [visibleItems, setVisibleItems] = React.useState([]);
-    // useEffect(()=>{
-    //     setVisibleItems(calculateVisibleItems)
-    // },[eventsArr, containerRef.current])
-
-    // useEffect(() => {
-    //     const handleVisibleItems = () => setVisibleItems(calculateVisibleItems());
-    //     if (containerRef.current) {
-    //         containerRef.current.addEventListener('scroll', handleVisibleItems);
-    //         return () => containerRef.current.removeEventListener('scroll', handleVisibleItems);
+    //     let startIndex = 0;
+    //     let endIndex = startIndex + 3
+    //     let topOffset = 0;
+    //     let bottomOffset = 0;
+    //     for (let i = 0; i < eventsArr.length; i++) {
+    //         const itemHeight = itemHeights.current[i] || 50; // default to 50 if height not measured yet
+    //         if (topOffset < scrollTop) {
+    //             startIndex = i;
+    //             topOffset += itemHeight;
+    //         }
+    //         if (bottomOffset < scrollTop + clientHeight) {
+    //             endIndex = i;
+    //             bottomOffset += itemHeight;
+    //         }
     //     }
-    // }, [eventsArr]);
+    //     // 上下额外多渲染几个 item，解决滚动时来不及加载元素出现短暂的空白区域的问题
+    //     const paddingCount = 2;
+    //     startIndex = Math.max(startIndex - paddingCount, 0); // 处理越界情况
+    //     endIndex = Math.min(endIndex + paddingCount, eventsArr.length - 1);
+    //     const v = eventsArr.slice(startIndex, endIndex + 1)
+    //     setVisibleItems(v);
+    // }
+    //
+    // const handleItemHeight = (index, height) => {
+    //     itemHeights.current[index] = height;
+    // };
 
     // 关闭搜索栏
     const closeSearchPanel = () => {
@@ -133,13 +151,14 @@ const ListView = () => {
     // 根据是否搜索来确定展示的是什么活动列表数据
     const eventList = (isSearch ? searchResArr : eventsArr).map((item, index) => {
         return (
-                <ListItem
-                    param = {item}
-                    key = {item.id + '' + index} //避免key重复
-                    itemID = {item.id}
-                    token = {token}
-                    avatar = {avatar}
-                ></ListItem>
+            <ListItem
+                param = {item}
+                key = {item.id + '' + index} //避免key重复
+                itemID = {item.id}
+                token = {token}
+                avatar = {avatar}
+                onHeight={height => handleItemHeight(index, height)}
+            ></ListItem>
         )
     })
 
