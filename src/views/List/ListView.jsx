@@ -36,14 +36,13 @@ const ListView = () => {
 
     const token = location.state?.token
 
-    const avatar = location.state?.avatar
+    const avatar = location.state?.avatar;
 
     // 获取页面DOM
     const containerRef = useRef(null);
 
     // 虚拟列表
     const listRef = useRef(null);
-    const itemHeight = window.innerWidth * 0.65;
 
     // 确保活动列表数据只初始化一次
     const hasFetchedInitialData = useRef(false)
@@ -199,7 +198,7 @@ const ListView = () => {
             <div className={ListViewStyle.container} id='main'>
                 {isSearchPanelOpen ? <div className={ListViewStyle.mask} /*关闭侧边搜索栏*/ onClick={closeSearchPanel}></div>: null}
                 <Header isSearchPanelOpen={isSearchPanelOpen} setIsSearchPanelOpen={setIsSearchPanelOpen}
-                        flag={'search'} avatar={avatar}/>
+                        flag={'search'}/>
                 <div
                     // Header position: fixed 占位行
                     style={{height: '13vw', overflow: 'hidden'}}

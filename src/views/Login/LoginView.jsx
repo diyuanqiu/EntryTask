@@ -26,6 +26,7 @@ const LoginView = () => {
 
             // 全局存储token，不必一级一级传递
             localStorage.setItem('token',res.token)
+            localStorage.setItem('avatar',res.user.avatar)
 
             setToken(res.token)
             setUser(res.user)
@@ -34,9 +35,16 @@ const LoginView = () => {
             // 注册
             let url = ('/join')
 
-            let res =await register(url,username,password)
-            console.log(res)
+            let resR =await register(url,username,password)
+            console.log(resR)
+
+            let res = await login('/auth/token',username,password)
             if(res.token){
+
+                // 全局存储token，不必一级一级传递
+                localStorage.setItem('token',res.token)
+                localStorage.setItem('avatar',res.user.avatar)
+
                 setToken(res.token)
                 setUser(res.user)
                 Navigate('/List',{state:{...res.user,token:res.token}})

@@ -8,7 +8,9 @@ const Header =  ((props) => {
 
     const Navigate = useNavigate();
 
-    const {setIsSearchPanelOpen, avatar} = props;
+    const {setIsSearchPanelOpen} = props;
+
+    const avatar = localStorage.getItem('avatar')
 
     // 根据当前页面决定点击事件
     const judgeFlag= () => {

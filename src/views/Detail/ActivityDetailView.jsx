@@ -33,8 +33,6 @@ const ActivityDetailView = () => {
 
     const token = eventDetail.token
 
-    const avatar = eventDetail.avatar
-
     useEffect(()=>{
         // console.log(eventDetail)
         // 检查token是否存在
@@ -72,7 +70,7 @@ const ActivityDetailView = () => {
     return (
         <React.Fragment>
             <div className={DetailStyle.container}>
-                <Header avatar={avatar}/>
+                <Header/>
                 <div
                     // Header position: fixed 占位行
                     style={{height: '13vw', overflow: 'hidden'}}
