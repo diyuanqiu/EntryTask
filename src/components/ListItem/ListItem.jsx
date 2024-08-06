@@ -10,7 +10,7 @@ import {changeGoingStatus, changeLikeStatus} from "../../api/apiFetch.js";
 
 const ListItem = (props) => {
 
-    const {param,token,avatar,top,height} = props
+    const {param,token,avatar} = props
 
     // 参与图标
     const [goImage, setGoImage] = useState(null)
@@ -96,7 +96,7 @@ const ListItem = (props) => {
 
     return (
         <React.Fragment>
-            <div className={ListItemStyle.container} style={{top:`${top}px`, height:'65vw'}}>
+            <div className={ListItemStyle.container}>
                 <div className={ListItemStyle.topInfo}>
                     <div className={ListItemStyle.userInfo}>
                         <img src={param.creator.avatar} alt={'用户头像'} className={ListItemStyle.userAva}/>
