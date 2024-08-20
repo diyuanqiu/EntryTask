@@ -1,0 +1,57 @@
+@font-face {
+    font-family: "SourceSans3-SemiBold";
+    src: url("../../../../assets/FONTs/SourceSans3-SemiBold.ttf");
+}
+
+@font-face {
+    font-family: "SourceSans3-Bold";
+    src: url("../../../../assets/FONTs/SourceSans3-Bold.ttf");
+}
+
+@font-face {
+    font-family: "SourceSans3-Regular";
+    src: url("../../../../assets/FONTs/SourceSans3-Regular.ttf");
+}
+/*
+    where
+ */
+.where {
+    width: 100%;
+    margin-top: 5vw;
+    margin-left: 4vw;
+    border-bottom: .6vw solid #E8E8E8;
+}
+
+.title {
+    margin-top: 5vw;
+    border-left: 1.5vw solid #8560A9;
+    border-radius: 2px;
+    padding-left: 1.5vw;
+    color: #8560A9;
+    font-family: "SourceSans3-SemiBold", serif;
+    font-size: 4vw;
+}
+
+.where .whereMain {
+    margin-top: 2vw;
+    color: #67616D;
+}
+
+.whereMain .whereTitle {
+    font-family: "SourceSans3-SemiBold", serif;
+    font-size: 4vw;
+}
+
+.whereMain .whereUnderTitle {
+    font-family: "SourceSans3-Regular", serif;
+    font-size: 4vw;
+    color: #67616D;
+}
+
+.whereMain .mapImg {
+    margin-top: 1.5vw;
+    margin-bottom: 1.8vw;
+    width: 90vw;
+    height: 27vw;
+    border-radius: 2vw
+}

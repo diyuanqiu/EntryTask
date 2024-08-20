@@ -8,6 +8,23 @@
     src: url("../../assets/FONTs/SourceSans3-Regular.ttf");
 }
 
+.mainContainer {
+    width: 100%;
+}
+
+.searchContainer {
+    position: fixed;
+    top: 0;
+    height: 100%;
+    right: 100%;
+    width: 75%;
+    transition: .5s;
+}
+
+.searchContainer.open {
+    right: 25%;
+}
+
 .mask {
     position: absolute;
     height: 100%;
@@ -15,8 +32,12 @@
 }
 
 .container {
-    height: 100vh;
+    height: 100%;
     transition: margin-left .5s;
+}
+
+.container.close {
+    margin-left: 75%;
 }
 
 .ListBox {
@@ -24,12 +45,17 @@
     overflow: scroll;
 }
 
+.ListBox.searchBox {
+    height: calc(100vh - 37vw);
+    margin-top: 24vw;
+}
+
 .Search {
     box-sizing: border-box;
-    width: 100vw;
+    width: 100%;
     background-color: #faf9fc;
     padding: 4.5vw 5vw 3.5vw 8vw;
-    position: sticky;
+    position: fixed;
     top: 13vw;
 }
 
@@ -70,29 +96,23 @@ div.Search button {
 }
 
 div.noActivity {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 30vh;
+    width: 100vw;
 }
 
-div.noActivity div {
-    margin-top: 60vh;
-    width: 16vw;
-    height: 16vw;
-    background-image: url('../../assets/SVGs/no-activity.svg');
+div.noActivity img {
+    margin-top: 5vw;
+    width: 30vw;
+    height: 30vw;
     background-repeat: no-repeat;
-    background-size: cover;
-    margin-right: 0;
 }
 
 div.noActivity p {
     font-family:SourceSansPro-Regular, serif;
-    margin: 0;
-    margin-top: 4vw;
+    margin: 4vw 0 0;
     font-size: 5vw;
     color: #BABABA;
 }

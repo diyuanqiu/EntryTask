@@ -1,5 +1,21 @@
 .container {
     height: 100vh;
+    overflow: scroll;
+}
+
+.detailContainer {
+    width: 100%;
+    scroll-margin-top: 26vw;
+}
+
+.participantContainer {
+    width: 100%;
+    scroll-margin-top: 26vw;
+}
+
+.commentContainer {
+    width: 100%;
+    scroll-margin-top: 26vw;
 }
 
 .container .main {

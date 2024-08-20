@@ -1,96 +1,128 @@
 import DetailStyle from "./ActivityDetailView.module.css";
 import Header from "../../components/Header/Header.jsx";
-import ActTop from "../../components/Detail/ActTop/ActTop.jsx";
-import ActTab from "../../components/Detail/ActTab/ActTab.jsx";
-import {useEffect, useState} from "react";
-import React from "react";
-import ActDescrip from "../../components/Detail/ActDescrip/ActDescrip.jsx";
-import ActWhenAndWhere from "../../components/Detail/ActWhenAndWhereInfo/ActWhenAndWhere.jsx";
-import ActParticipant from "../../components/Detail/ActParticipant/ActParticipant.jsx";
-import ActComment from "../../components/Detail/ActComment/ActComment.jsx";
-import ActDownBar from "../../components/Detail/ActDownBar/ActDownBar.jsx";
-import ActCommentBar from "../../components/Detail/ActDownBar/ActCommentBar.jsx";
-import {useLocation, useNavigate} from "react-router-dom";
-import {postCommentToEvent} from "../../api/apiFetch.js";
+import ActTop from "./Component/ActTop/ActTop.jsx"
+import ActTab from "./Component/ActTab/ActTab.jsx";
+import {useRef, useState} from "react";
+import ActDescrip from "./Component/ActDescrip/ActDescrip.jsx";
+import ActWhen from "./Component/ActWhen/ActWhen.jsx";
+import ActWhere from "./Component/ActWhere/ActWhere.jsx";
+import ActParticipantAndLikes from "./Component/ActParticipantAndLikes/ActParticipantAndLikes.jsx";
+import ActComment from "./Component/ActComment/ActComment.jsx";
+import ActDownBar from "./Component/ActDownBar/ActDownBar.jsx";
+import ActCommentBar from "./Component/ActDownBar/ActCommentBar.jsx";
+import {ActivityDetailContext} from "./Context/ActivityDetailContext.jsx"
+import {useLocation} from "react-router-dom";
+import {fetchEventComments, fetchEventLikes, fetchEventParticipants} from "../../api/apiFetch.js";
 
+function ActivityDetailView() {
 
-const ActivityDetailView = () => {
+    const eventDetail = useLocation().state?.event;
 
-    const location = useLocation()
+    const detailsRef = useRef(null);
+    const participantsRef = useRef(null);
+    const commentsRef = useRef(null);
 
-    const navigate = useNavigate()
+    const sections = [
+        { id: 'details', label: 'Details', ref: detailsRef },
+        { id: 'participants', label: 'Participants', ref: participantsRef },
+        { id: 'comments', label: 'Comments', ref: commentsRef }
+    ];
 
-    const eventDetail = location.state
+    // 用户是否要评论
+    const [isComment, setIsComment] = useState(false);
+    // 参与人
+    const [participants, setParticipants] = useState([]);
+    // 点赞人
+    const [likes, setLikes] = useState([]);
+    // 活动评论
+    const [comments, setComments] = useState([]);
+    // 初始化
+    const flagRef = useRef(false);
 
-    // tabBar选择情况
-    const [isSelect, setIsSelect] = useState(0)
+    if (!flagRef.current) {
+        flagRef.current = true;
+        updateLikes();
+        updateParticipants();
+        updateComments();
+    }
 
-    // 用户是否评论
-    const [isComment, setIsComment] = useState(false)
-
-    // 用户评论内容
-    const [commentContent, setCommentContent] = useState('')
-
-    const token = eventDetail.token
-
-    useEffect(()=>{
-        // console.log(eventDetail)
-        // 检查token是否存在
-        if(!token){
-            alert("No token found")
-            navigate(-1)
+    async function updateParticipants() {
+        try {
+            const res = await fetchEventParticipants(eventDetail.id);
+            setParticipants(res.users);
+        } catch (error) {
+            console.error('Error fetching participants', error);
         }
-    },[token])
+    }
 
-    // 快速锚点 select：tabBar选择情况
-    const scrollToAnchor = (select) => {
-        let anchorElement = null
-        if (select === 0) {
-            anchorElement = document.getElementById("Description")
-        } else if (select === 1){
-            anchorElement = document.getElementById("Participants")
-        } else
-            anchorElement = document.getElementById("Comments")
+    async function updateLikes() {
+        try {
+            const res = await fetchEventLikes(eventDetail.id);
+            setLikes(res.users);
+        } catch (error) {
+            console.error('Error fetching participants', error);
+        }
+    }
+
+    async function updateComments(){
+        try {
+            let res = await fetchEventComments(eventDetail.id);
+            setComments(res.comments.reverse())
+        } catch (error) {
+            console.error('Error fetching comments', error);
+        }
+
+    }
+
+    const [visibleSection, setVisibleSection] = useState(sections[0]?.ref.current);
+    // 监听滚动事件，判断哪个section进入视野
+    const handleScroll = () => {
+        let currentSection = sections[0]?.ref.current;  // 默认选中第一个 section
+        const offset = window.innerWidth * 0.4;
+        sections.forEach(section => {
+            const { top } = section.ref.current.getBoundingClientRect();
+            if (top <= offset) {
+                currentSection = section.ref.current;
+            }
+        });
+        setVisibleSection(currentSection);
+    };
+
+    // 快速锚点
+    const scrollToAnchor = (index) => {
+        const anchorElement = sections[index]?.ref.current;
         if (anchorElement) {
-            anchorElement.scrollIntoView({behavior:'smooth', block: 'start'})
+            anchorElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-    }
-
-    // 发送评论
-    const sendComment = async (comment) => {
-        let url = `/events/${eventDetail.id}/comments`
-
-        let res = await postCommentToEvent(url, eventDetail.token, comment)
-
-        if (res) {
-            setCommentContent(comment)
-        }
-    }
+    };
 
     return (
-        <React.Fragment>
-            <div className={DetailStyle.container}>
-                <Header/>
-                <div
-                    // Header position: fixed 占位行
-                    style={{height: '13vw', overflow: 'hidden'}}
-                ></div>
+        <ActivityDetailContext.Provider value={eventDetail}>
+            <div className={DetailStyle.container} onScroll={handleScroll}>
+                <Header />
+                <div style={{height: '13vw', overflow: 'hidden'}}></div>
                 <div className={DetailStyle.main}>
-                    <ActTop param={eventDetail}/>
-                    <ActTab isSelect={isSelect} setIsSelect={setIsSelect} scrollToAnchor={scrollToAnchor}/>
-                    <ActDescrip param={eventDetail}/>
-                    <ActWhenAndWhere param={eventDetail}/>
-                    <ActParticipant param={eventDetail} />
-                    <ActComment param={eventDetail} commentContent={commentContent}/>
-                    {/* 底部Bar */}
+                    <ActTop />
+                    <ActTab scrollToAnchor={scrollToAnchor} sections={sections} visibleSection={visibleSection}/>
+                    <div className={DetailStyle.detailContainer} ref={sections[0].ref}>
+                        <ActDescrip />
+                        <ActWhen />
+                        <ActWhere />
+                    </div>
+                    <div className={DetailStyle.participantContainer} ref={sections[1].ref}>
+                        <ActParticipantAndLikes participants={participants} likes={likes}/>
+                    </div>
+                    <div className={DetailStyle.commentContainer} ref={sections[2].ref}>
+                        <ActComment comments={comments}/>
+                    </div>
                     {isComment ?
-                        <ActCommentBar sendComment={sendComment} isComment={isComment} setIsComment={setIsComment}/>
-                        : <ActDownBar param={eventDetail} isComment={isComment} setIsComment={setIsComment}/>
+                        <ActCommentBar setIsComment={setIsComment} updateComments={updateComments}/>
+                        : <ActDownBar setIsComment={setIsComment} updateParticipants={updateParticipants} updateLikes={updateLikes} />
                     }
                 </div>
             </div>
-        </React.Fragment>
-    )
+        </ActivityDetailContext.Provider>
+    );
 }
 
 export default ActivityDetailView;

@@ -1,0 +1,80 @@
+@font-face {
+    font-family: "SourceSans3-SemiBold";
+    src: url("../../../../assets/FONTs/SourceSans3-SemiBold.ttf");
+}
+
+@font-face {
+    font-family: "SourceSans3-Bold";
+    src: url("../../../../assets/FONTs/SourceSans3-Bold.ttf");
+}
+
+@font-face {
+    font-family: "SourceSans3-Regular";
+    src: url("../../../../assets/FONTs/SourceSans3-Regular.ttf");
+}
+
+/*
+    when
+ */
+
+.when {
+    width: 100%;
+    margin-top: 5vw;
+    margin-left: 4vw;
+    border-top: .6vw solid #E8E8E8;
+    border-bottom: .6vw solid #E8E8E8;
+}
+
+.title {
+    margin-top: 5vw;
+    border-left: 1.5vw solid #8560A9;
+    border-radius: 2px;
+    padding-left: 1.5vw;
+    color: #8560A9;
+    font-family: "SourceSans3-SemiBold", serif;
+    font-size: 4vw;
+}
+
+.when .whenMain {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 4vw;
+    margin-bottom: 5vw;
+    color: #67616D;
+}
+
+.when .whenMain .begin {
+    border-right: 1px solid #E8E8E8;
+    padding-right: 10vw;
+    margin-left: 12vw;
+}
+
+.when .whenMain .end {
+    padding-left: 10vw;
+}
+
+.dateContent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.dateIcon {
+    width: 4vw;
+    height: 4vw;
+}
+
+.dateDate {
+    font-family: "SourceSans3-Regular", serif;
+    font-size: 3.5vw;
+    margin-left: 1vw;
+}
+
+.dateTime {
+    font-family: "SourceSans3-Regular", serif;
+    font-size: 7vw;
+    margin-left: 3vw;
+    color: #AECB4F;
+}

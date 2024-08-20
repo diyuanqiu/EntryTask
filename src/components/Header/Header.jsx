@@ -4,37 +4,33 @@ import homeIcon from '../../assets/SVGs/home.svg';
 import headerStyle from './Header.module.css';
 import {useNavigate} from "react-router-dom";
 
-const Header =  ((props) => {
+function Header({flag, setIsSearchPanelOpen}) {
 
-    const Navigate = useNavigate();
+    const navigate = useNavigate();
 
-    const {setIsSearchPanelOpen} = props;
-
-    const avatar = localStorage.getItem('avatar')
-
+    const avatar = localStorage.getItem('avatar');
     // 根据当前页面决定点击事件
-    const judgeFlag= () => {
-        if (props.flag === 'search') {
-            setIsSearchPanelOpen(true)
-            document.getElementById("sidebar").style.right = "25%";
-            document.getElementById("main").style.marginLeft = "75%";
+    const handleHeaderClick = () => {
+        if (flag === 'search') {
+            setIsSearchPanelOpen(true);
         } else {
-            Navigate(-1)
+            navigate(-1);
         }
-    }
+    };
 
     // 导航至个人页面
     const naviHomePage = () => {
-        Navigate('/Home')
-    }
+        navigate('/Home')
+    };
 
     return (
         <div className={headerStyle.container}>
-            <img src={props.flag === 'search' ? searchIcon : homeIcon} alt='img' className={headerStyle.search} onClick={judgeFlag}/>
+            <img src={flag === 'search' ? searchIcon : homeIcon} alt='img' className={headerStyle.search}
+                 onClick={handleHeaderClick}/>
             <img src={logoIcon} alt='img' className={headerStyle.logo}/>
             <img src={avatar} alt='img' className={headerStyle.user} onClick={naviHomePage}/>
         </div>
     )
-})
+}
 
 export default Header

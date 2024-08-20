@@ -1,23 +1,41 @@
-async function myFetch(url,init){
+async function myFetch(url,init,requireAuth = true){
 
-    let result;
+    try {
+        // 默认初始化配置
+        const defaultInit = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            mode: 'cors',
+            ...init
+        };
 
-    let defaultInit = {
-        headers:{
-            'Content-Type':'application/json',
-        },
-        mode:'cors'
+        // 检查用户是否登录
+        if (requireAuth) {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '/Login';
+                return;
+            }
+            defaultInit.headers['X-BLACKCAT-TOKEN'] = token;
+        }
+
+        const response = await fetch(url, defaultInit);
+        const text = await response.text();
+        const result = text ? JSON.parse(text) : {}
+
+        // 检查token是否过期
+        if (result.error === 'invalid_token') {
+            localStorage.removeItem('token');
+            window.location.href = '/Login';
+            return;
+        }
+
+        return result;
+
+    } catch (error) {
+        console.error('Fetch error:', error.message);
     }
-    init = Object.assign(defaultInit,init) // 将 init 对象中的属性合并到 defInit 中，
-    await fetch(url,init)
-        .then(data => data.text()) // 将响应体读取为文本
-        .then(res => {
-            result = JSON.parse(res)  // 将文本解析为 JSON 对象
-        }).catch(error => {
-            console.log('error.message :>> ', error.message); // 如果错误,输出错误信息
-        })
-
-    return result;
 }
 
 export default myFetch;

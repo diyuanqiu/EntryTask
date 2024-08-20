@@ -1,0 +1,98 @@
+@font-face {
+    font-family: "SourceSans3-SemiBold";
+    src: url("../../../../assets/FONTs/SourceSans3-SemiBold.ttf");
+}
+
+@font-face {
+    font-family: "SourceSans3-Bold";
+    src: url("../../../../assets/FONTs/SourceSans3-Bold.ttf");
+}
+
+@font-face {
+    font-family: "SourceSans3-Regular";
+    src: url("../../../../assets/FONTs/SourceSans3-Regular.ttf");
+}
+
+.container {
+    width: 100%;
+}
+
+.container .imgArray {
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    margin-top: 3.5vw;
+    margin-bottom: 3.5vw;
+}
+
+/*
+ 隐藏滚动条（Chrome和Safari）
+ */
+.imgArray::-webkit-scrollbar {
+    display: none;
+}
+
+.container .imgArray .img {
+    max-width: 70vw;
+    width: 70vw;
+    height: 30vw;
+    border-radius: 2vw;
+    margin-left: 3vw;
+}
+
+.container .descip{
+    display: flex;
+    margin-left: 4vw;
+    margin-right: 3vw;
+}
+
+.descip .text{
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    text-align: left;
+    font-family: "SourceSans3-Regular", serif;
+    font-size: 3.7vw;
+    color: transparent;
+    background: linear-gradient(0deg, transparent, #67616D);
+    background-clip: text;
+}
+
+.descip .text::before {
+    content: '';
+    float: right;
+    width: 0;
+    height: calc(100% - 7vw);
+}
+
+.showText{
+    display: -webkit-box;
+    -webkit-line-clamp: 999;
+    -webkit-box-orient: vertical;
+    text-align: left;
+    font-family: "SourceSans3-Regular", serif;
+    font-size: 3.7vw;
+    color: #67616D;
+}
+
+.descip .showText::before {
+    content: '';
+    float: right;
+    width: 0;
+    height: calc(100% - 7vw);
+}
+
+.descip .viewButton {
+    float: right;
+    clear: both;
+    right: 3vw;
+    bottom: 30vh;
+    width: 17vw;
+    height: 7vw;
+    font-family: "SourceSans3-SemiBold", serif;
+    font-size: 2.5vw;
+    background-color: #D5EF7F;
+    border-radius: 3.5vw;
+    border: none;
+}

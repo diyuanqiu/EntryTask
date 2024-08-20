@@ -1,90 +1,95 @@
 import loginStyle from './LoginView.module.css'
 import logoIcon from '../../assets/SVGs/logo-cat.svg'
 import {useNavigate} from "react-router-dom";
-import React, {useState} from "react";
+import {useEffect, useState} from "react";
 import {login, register} from "../../api/apiFetch.js";
 
-const LoginView = () => {
+function LoginView() {
 
-    const Navigate = useNavigate()
+    const navigate = useNavigate();
 
-    const [username, setUsername] = useState('') // 用户名
+    const [username, setUsername] = useState(''); // 用户名
 
-    const [password, setPassword] = useState('') // 用户密码
+    const [password, setPassword] = useState(''); // 用户密码
 
-    const [token, setToken] = useState('') // 用户登录后token
+    const [loading, setLoading] = useState(false);
 
-    const [user, setUser] = useState({}) // 用户个人信息
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            navigate('/List');
+        }
+    }, [navigate]);
 
-    const loginToCat = async() => {
+    // 登录处理逻辑
+    async function loginToCat() {
+        if (!username || !password) {
+            alert("Username or password should not be empty!");
+            return;
+        }
+        setLoading(true);
+        try {
+            let res = await login(username, password, false);
 
-        let url = ('/auth/token')
-
-        let res = await login(url,username,password)
-        console.log(res)
-        if (res.token) {
-
-            // 全局存储token，不必一级一级传递
-            localStorage.setItem('token',res.token)
-            localStorage.setItem('avatar',res.user.avatar)
-
-            setToken(res.token)
-            setUser(res.user)
-            Navigate('/List',{state:{...res.user,token:res.token}})
-        } else if (res.error === "error_user_not_found") {
-            // 注册
-            let url = ('/join')
-
-            let resR =await register(url,username,password)
-            console.log(resR)
-
-            let res = await login('/auth/token',username,password)
-            if(res.token){
-
-                // 全局存储token，不必一级一级传递
-                localStorage.setItem('token',res.token)
-                localStorage.setItem('avatar',res.user.avatar)
-
-                setToken(res.token)
-                setUser(res.user)
-                Navigate('/List',{state:{...res.user,token:res.token}})
+            // 用户密码错误
+            if (res.error === "error_password") {
+                alert("Error password!");
+                return;
             }
-        } else {
-            alert('error password')
+
+            // 用户注册
+            if (res.error === "error_user_not_found") {
+                const registerRes = await register(username, password, false);
+                if (!registerRes.userId) {
+                    alert("Error registering user!");
+                    return;
+                }
+                res = await login(username, password);
+            }
+
+            // 用户登录成功
+            if (res.token) {
+                localStorage.setItem('token', res.token);
+                localStorage.setItem('avatar', res.user.avatar);
+                navigate('/List');
+            }
+        } catch (error) {
+            console.error("Login error:", error);
+            alert("Login failed due to an error.");
+        } finally {
+            setLoading(false);
         }
     }
 
     return (
-        <React.Fragment>
-            <div className={loginStyle.container}>
-                <div className={loginStyle.box}>
-                    <div className={loginStyle.mask}>
-                        <div className={loginStyle.title}>
-                            <div className={loginStyle.titleText}>
-                                <p className={loginStyle.title1}>FIND THE MOST LOVED ACTIVITIES</p>
-                                <p className={loginStyle.title2}>BLACK CAT</p>
-                            </div>
-                            <div className={loginStyle.titlePic}>
-                                <img src={logoIcon} alt=' ' className={loginStyle.logoPic}/>
-                            </div>
+        <div className={loginStyle.container}>
+            <div className={loginStyle.box}>
+                <div className={loginStyle.mask}>
+                    <div className={loginStyle.title}>
+                        <div className={loginStyle.titleText}>
+                            <p className={loginStyle.title1}>FIND THE MOST LOVED ACTIVITIES</p>
+                            <p className={loginStyle.title2}>BLACK CAT</p>
                         </div>
-                        <div className={loginStyle.inputBox}>
-                            <input type={"text"} placeholder={"Username"} className={loginStyle.usernameInput}
-                                   onChange={(e)=> {
-                                       setUsername(e.target.value)
-                                   }}/>
-                            <input type={"password"} placeholder={"Password"} className={loginStyle.passwordInput}
-                                   onChange={(e)=>{
-                                       setPassword(e.target.value)
-                                   }}/>
+                        <div className={loginStyle.titlePic}>
+                            <img src={logoIcon} alt=' ' className={loginStyle.logoPic}/>
                         </div>
                     </div>
-                </div>
-                <div className={loginStyle.button} onTouchStart={loginToCat}>
-                    SIGN IN
+                    <div className={loginStyle.inputBox}>
+                        <input type={"text"} placeholder={"Username"} className={loginStyle.usernameInput}
+                               onChange={(e) => {
+                                   setUsername(e.target.value)
+                               }}/>
+                        <input type={"password"} placeholder={"Password"} className={loginStyle.passwordInput}
+                               onChange={(e) => {
+                                   setPassword(e.target.value)
+                               }}/>
+                    </div>
                 </div>
             </div>
-        </React.Fragment>
+            <div className={loginStyle.button} onClick={!loading ? loginToCat : null} aria-disabled={loading}>
+                SIGN IN
+            </div>
+        </div>
     )
 }
 
