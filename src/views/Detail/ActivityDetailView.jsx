@@ -75,8 +75,13 @@ function ActivityDetailView() {
     }
 
     const [visibleSection, setVisibleSection] = useState(sections[0]?.ref.current);
-    // 监听滚动事件，判断哪个section进入视野
-    const handleScroll = () => {
+
+    // 定时器
+    const scrollTimeoutRef = useRef(null);
+
+    // 处理滚动停止后的逻辑
+    const handleScrollStop = () => {
+        console.log(1);
         let currentSection = sections[0]?.ref.current;  // 默认选中第一个 section
         const offset = window.innerWidth * 0.4;
         sections.forEach(section => {
@@ -86,6 +91,18 @@ function ActivityDetailView() {
             }
         });
         setVisibleSection(currentSection);
+    };
+
+    // 监听滚动事件
+    const handleScroll = () => {
+        // 每次滚动时，清除之前的定时器
+        if (scrollTimeoutRef.current) {
+            clearTimeout(scrollTimeoutRef.current);
+        }
+        // 启动一个新的定时器
+        scrollTimeoutRef.current = setTimeout(() => {
+            handleScrollStop();
+        }, 200); // 设定200ms的延迟，滚动停止后200ms才执行
     };
 
     // 快速锚点
