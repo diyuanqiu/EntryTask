@@ -81,7 +81,6 @@ function ActivityDetailView() {
 
     // 处理滚动停止后的逻辑
     const handleScrollStop = () => {
-        console.log(1);
         let currentSection = sections[0]?.ref.current;  // 默认选中第一个 section
         const offset = window.innerWidth * 0.4;
         sections.forEach(section => {
