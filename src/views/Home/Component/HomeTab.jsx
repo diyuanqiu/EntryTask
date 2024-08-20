@@ -22,12 +22,12 @@ function TabItem({ isSelected, icon, selectedIcon, label, count, onClick }) {
 }
 
 const tabsConfig = [
-    { id: 0, label: 'Likes', icon: likeIcon, selectedIcon: likeIconSelect, countKey: 'likes_count' },
-    { id: 1, label: 'Going', icon: goingIcon, selectedIcon: goingIconSelect, countKey: 'goings_count' },
-    { id: 2, label: 'Past', icon: pastIcon, selectedIcon: pastIconSelect, countKey: 'past_count' },
+    { id: 0, label: 'liked', icon: likeIcon, selectedIcon: likeIconSelect, countKey: 'likes_count' },
+    { id: 1, label: 'going', icon: goingIcon, selectedIcon: goingIconSelect, countKey: 'goings_count' },
+    { id: 2, label: 'past', icon: pastIcon, selectedIcon: pastIconSelect, countKey: 'past_count' },
 ];
 
-function HomeTab({ isSelect, setIsSelect, user }) {
+function HomeTab({ isSelect, setIsSelect, user, getEvents }) {
     return (
         <div className={HomeTabStyle.container}>
             {tabsConfig.map(tab => (
@@ -38,7 +38,7 @@ function HomeTab({ isSelect, setIsSelect, user }) {
                     selectedIcon={tab.selectedIcon}
                     label={tab.label}
                     count={user[tab.countKey]}
-                    onClick={() => setIsSelect(tab.id)}
+                    onClick={() => {setIsSelect(tab.id);getEvents(tab.label)}}
                 />
             ))}
         </div>

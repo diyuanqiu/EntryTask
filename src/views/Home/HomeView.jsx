@@ -32,11 +32,9 @@ function EventList({ events }) {
 }
 
 function HomeView() {
-    const [isSelect, setIsSelect] = useState(0); // tabBar选择情况
+    const [selectTab, setSelectTab] = useState(0); // tabBar选择情况
     const [user, setUser] = useState({});
-    const [likeEvents, setLikeEvents] = useState([]);
-    const [pastEvents, setPastEvents] = useState([]);
-    const [goingEvents, setGoingEvents] = useState([]);
+    const [events, setEvents] = useState([]);
 
     const fetchUserInfo = async () => {
         try {
@@ -47,15 +45,11 @@ function HomeView() {
         }
     };
 
-    const fetchEvents = async () => {
+    const fetchEvents = async (type) => {
         try {
-            const likeEvents= await fetchUserEvents('liked');
-            const pastEvents = await fetchUserEvents('past');
-            const goingEvents = await fetchUserEvents('going');
-
-            setLikeEvents(likeEvents.events);
-            setPastEvents(pastEvents.events);
-            setGoingEvents(goingEvents.events);
+            const typeEvents= await fetchUserEvents(type);
+            await fetchUserInfo();
+            setEvents(typeEvents.events);
         } catch (error) {
             console.log("Can't find events", error);
         }
@@ -65,19 +59,16 @@ function HomeView() {
 
     if (!initialRef.current) {
         initialRef.current = true;
-        fetchEvents();
-        fetchUserInfo();
+        fetchEvents('liked');
     }
 
     return (
         <div className={HomeViewStyle.container}>
             <Header flag={'Home'}/>
             <HomeInfo user={user} />
-            <HomeTab user={user} isSelect={isSelect} setIsSelect={setIsSelect} />
+            <HomeTab user={user} isSelect={selectTab} setIsSelect={setSelectTab} getEvents={fetchEvents}/>
             <div className={HomeViewStyle.ListBox}>
-                {isSelect === 0 && <EventList events={likeEvents}/>}
-                {isSelect === 1 && <EventList events={goingEvents}/>}
-                {isSelect === 2 && <EventList events={pastEvents}/>}
+                <EventList events={events} />
             </div>
         </div>
     );
