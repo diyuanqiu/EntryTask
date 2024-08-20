@@ -1,14 +1,14 @@
 // 活动列表渲染子组件
 import ListItem from "../../../../components/ListItem/ListItem.jsx";
 
-const EventList = ({ eventsArr, searchResArr, isSearch, isLoading }) => {
+const EventList = ({ eventsArr,isLoading }) => {
 
     return (
         <>
-            {(isSearch ? searchResArr : eventsArr).map((item) => (
+            {eventsArr.map((item) => (
                 <ListItem
                     param = {item}
-                    key = {item.id } //避免key重复
+                    key = {item.id }
                     itemID = {item.id}
                 ></ListItem>
             ))}

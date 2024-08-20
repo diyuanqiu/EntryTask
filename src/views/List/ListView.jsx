@@ -14,60 +14,66 @@ function ListView() {
     const [isSearchPanelOpen, setIsSearchPanelOpen] = useState(false);
     // 搜索活动列表长度
     const [total, setTotal] = useState(0);
-    // 是否展示搜索活动列表
+    // 是否点击搜索
     const [isSearch, setIsSearch] = useState(false);
-    // 搜索结果活动列表
-    const [searchResArr, setSearchResArr] = useState([]);
-    // 获取页面DOM
-    const containerRef = useRef(null);
+
     const [channelId, setChannelId] = useState([]);
     const [after, setAfter] = useState(null);
     const [before, setBefore] = useState(null);
-    const { eventsArr, isLoading, channels, setIsLoading, setEventsArr} = events;
+
+    const isLoadingRef = useRef(false);
+    const { eventsArr, channels, setEventsArr, fetchInitialEvents} = events;
 
     const fetchMoreEventsResults = async () => {
-        setIsLoading(true);
+        if (isLoadingRef.current) return;
+        isLoadingRef.current = true;
         try {
-            if (!isSearch) {
-                const res = await fetchEvents(eventsArr.length);
-                setEventsArr(prevEvents => [...prevEvents, ...res.events]);
-            } else {
-                const res = await fetchEvents(searchResArr.length, 10, channelId.join(','), after, before);
-                setSearchResArr(prevEvents => [...prevEvents, ...res.events]);
-            }
+            const params = {
+                offset: eventsArr.length,
+                limit: 10,
+                channelId: channelId.length > 0 ? channelId.join(',') : '',
+                after: after || null,
+                before: before || null,
+            };
+            const res = await fetchEvents(params);
+            setEventsArr(prevEvents => [...prevEvents, ...res.events]);
+            isLoadingRef.current = false;
         } catch (error) {
             console.error("Error fetching more events:", error);
-        } finally {
-            setIsLoading(false);
         }
     };
 
     const handleSearch = async (channelPickId, after, before) => {
-        setIsLoading(true);
+        isLoadingRef.current = true;
         setIsSearch(true);
         try {
-            const res = await fetchEvents(0, 10, channelPickId.join(','), after, before);
-            setSearchResArr(res.events);
+            const params = {
+                offset: 0,
+                limit: 10,
+                channelId: channelPickId.join(','),
+                after,
+                before,
+            };
+            const res = await fetchEvents(params);
+            setEventsArr(res.events);
             setTotal(res.total);
+            isLoadingRef.current = false;
         } catch (error) {
             console.error("Error performing search:", error);
-        } finally {
-            setIsLoading(false);
         }
     };
 
     const handleClearSearch = () => {
-        setSearchResArr([]);
         setIsSearch(false);
+        setEventsArr([]);
+        fetchInitialEvents();  // 重新加载初始活动数据
     };
 
     // 处理滚动事件
-    const handleScroll = () => {
-        if (containerRef.current) {
-            const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
-            if (scrollHeight - scrollTop <= clientHeight * 1.5 && !isLoading) {
-                fetchMoreEventsResults();
-            }
+    const handleScroll = (e) => {
+        const container = e.target;
+        if (container.scrollHeight - container.scrollTop <= container.clientHeight * 1.5 && !isLoadingRef.current) {
+            fetchMoreEventsResults();
         }
     };
 
@@ -102,8 +108,8 @@ function ListView() {
                     before={before}
                     handleClearSearch={handleClearSearch}
                 />
-                <div className={`${ListViewStyle.ListBox} ${isSearch ? ListViewStyle.searchBox : ''}`} ref={containerRef} onScroll={handleScroll}>
-                    <EventList eventsArr={eventsArr} searchResArr={searchResArr} isSearch={isSearch} isLoading={isLoading} />
+                <div className={`${ListViewStyle.ListBox} ${isSearch ? ListViewStyle.searchBox : ''}`} onScroll={(e) => handleScroll(e)}>
+                    <EventList eventsArr={eventsArr} isLoading={isLoadingRef.current} />
                 </div>
             </div>
         </div>

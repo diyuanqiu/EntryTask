@@ -7,21 +7,16 @@ export function EventsProvider({ children }) {
 
     // 展示活动列表
     const [eventsArr, setEventsArr] = useState([]);
-    // 在加载数据时显示加载状态，避免重复请求: loading
-    const [isLoading, setIsLoading] = useState(false);
     const [channels, setChannels] = useState([]);
 
     const initialRef = useRef(false);
 
     const fetchInitialEvents = async () => {
-        setIsLoading(true);
         try {
             const res = await fetchEvents(0);
             setEventsArr(res.events);
         } catch (error) {
             console.error("Error fetching events:", error);
-        } finally {
-            setIsLoading(false);
         }
     };
 
@@ -45,9 +40,8 @@ export function EventsProvider({ children }) {
             value={{
                 eventsArr,
                 setEventsArr,
-                isLoading,
-                setIsLoading,
                 channels,
+                fetchInitialEvents
             }}
         >
             {children}
