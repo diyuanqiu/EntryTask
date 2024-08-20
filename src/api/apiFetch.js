@@ -30,7 +30,7 @@ export const register = async (username, password) => {
 /*
 * 请求活动列表数据
 * */
-export const fetchEvents = async (offset, limit = 10, channelId = '', after = null, before = null) => {
+export const fetchEvents = async ({offset, limit = 10, channelId = '', after = null, before = null}) => {
 
     let url = `/events?offset=${offset}&limit=${limit}`;
 
